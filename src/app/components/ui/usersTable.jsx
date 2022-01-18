@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import BookMark from "../common/bookmark";
-import Qualities from "../ui/qualities";
-import Table from "../common/table/table";
+import Qualities from "./qualities";
+import Table from "../common/table";
 import { Link } from "react-router-dom";
 
 const UserTable = ({
@@ -18,9 +18,7 @@ const UserTable = ({
     name: {
       path: "name",
       name: "Имя",
-      component: (user) => (
-        <Link to={`/users/${user._id}`}>{user.name}</Link>
-      )
+      component: (user) => <Link to={`/users/${user._id}`}>{user.name}</Link>
     },
     qualities: {
       name: "Качества",
@@ -44,11 +42,8 @@ const UserTable = ({
     },
     delete: {
       component: (user) => (
-        <button
-          onClick={() => onDelete(user._id)}
-          className="btn btn-danger"
-        >
-                    delete
+        <button onClick={() => onDelete(user._id)} className="btn btn-danger">
+          delete
         </button>
       )
     }

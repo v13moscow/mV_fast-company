@@ -60,24 +60,17 @@ const UsersListPage = () => {
     const filteredUsers = searchQuery
       ? users.filter(
         (user) =>
-          user.name
-            .toLowerCase()
-            .indexOf(searchQuery.toLowerCase()) !== -1
+          user.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1
       )
       : selectedProf
         ? users.filter(
           (user) =>
-            JSON.stringify(user.profession) ===
-            JSON.stringify(selectedProf)
+            JSON.stringify(user.profession) === JSON.stringify(selectedProf)
         )
         : users;
 
     const count = filteredUsers.length;
-    const sortedUsers = _.orderBy(
-      filteredUsers,
-      [sortBy.path],
-      [sortBy.order]
-    );
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
     const usersCrop = paginate(sortedUsers, currentPage, pageSize);
     const clearFilter = () => {
       setSelectedProf();
@@ -92,12 +85,9 @@ const UsersListPage = () => {
               items={professions}
               onItemSelect={handleProfessionSelect}
             />
-            <button
-              className="btn btn-secondary mt-2"
-              onClick={clearFilter}
-            >
+            <button className="btn btn-secondary mt-2" onClick={clearFilter}>
               {" "}
-                            Очистить
+              Очистить
             </button>
           </div>
         )}
