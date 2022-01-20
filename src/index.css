@@ -11,3 +11,12 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
         monospace;
 }
+.table {
+    vertical-align: middle;
+    table-layout: fixed;
+}
+
+td {
+    height: 105px;
+}
+
