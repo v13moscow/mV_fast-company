@@ -10,8 +10,22 @@ const MultiSelectField = ({ options, onChange, name, label, defaultValue }) => {
         value: options[optionName]._id
       }))
       : options;
-  const handleChange = (value) => {
-    onChange({ name: name, value });
+  const addDefaultValue = defaultValue.map((item) => ({
+    label: item.name,
+    value: item._id
+  }));
+
+  const handleChange = (selectedOptions) => {
+    const delDefaultValue = selectedOptions.reduce((acc, { value: id }) => {
+      const item = Object.values(options).find((item) => {
+        return id === item._id;
+      });
+      if (item === undefined) {
+        return acc;
+      }
+      return [...acc, item];
+    }, []);
+    onChange({ name: name, value: delDefaultValue });
   };
   return (
     <div className="mb-4">
@@ -19,7 +33,7 @@ const MultiSelectField = ({ options, onChange, name, label, defaultValue }) => {
       <Select
         isMulti
         closeMenuOnSelect={false}
-        defaultValue={defaultValue}
+        defaultValue={addDefaultValue}
         options={optionsArray}
         className="basic-multi-select"
         classNamePrefix="select"
@@ -29,6 +43,7 @@ const MultiSelectField = ({ options, onChange, name, label, defaultValue }) => {
     </div>
   );
 };
+
 MultiSelectField.propTypes = {
   options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   onChange: PropTypes.func,
