@@ -5,6 +5,7 @@ import TextField from "../../common/form/textField";
 import SelectField from "../../common/form/selectField";
 import RadioField from "../../common/form/radioField";
 import MultiSelectField from "../../common/form/multiSelectField";
+import BackHistoryButton from "./backButton";
 
 const UsersEdit = () => {
   const params = useParams();
@@ -46,6 +47,7 @@ const UsersEdit = () => {
   return (
     user && (
       <div className="container mt-5">
+        <BackHistoryButton />
         <div className="row">
           <div className="col-md-6 offset-md-3 shadow p-4">
             <form className="preference" onSubmit={handleSubmit}>
